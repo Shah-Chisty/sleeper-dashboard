@@ -227,19 +227,51 @@ td.cell.keep.self{background:linear-gradient(135deg,var(--brass-wash) 0%,var(--b
 tr.self td{background:var(--you-wash)}
 tr.self td strong{color:var(--ink)}
 .who .self-tag{color:var(--you); font-weight:600}
-ol.rules{list-style:none; counter-reset:r; margin:0; padding:0; display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(330px,1fr)); gap:2px;
-  border:1px solid var(--line); border-radius:4px; overflow:hidden;
-  background:var(--line-soft); box-shadow:var(--shadow)}
-ol.rules li{display:flex; gap:14px; align-items:flex-start; background:var(--surface); padding:16px 18px}
-ol.rules .rn{flex:0 0 auto; width:25px; height:25px; border-radius:50%;
+details.drop{background:var(--surface); border:1px solid var(--line); border-radius:5px;
+  box-shadow:var(--shadow); margin-bottom:12px; overflow:hidden}
+details.drop summary{display:flex; align-items:center; gap:16px; padding:19px 22px;
+  cursor:pointer; list-style:none; transition:background .12s}
+details.drop summary::-webkit-details-marker{display:none}
+details.drop summary:hover{background:var(--surface-2)}
+details.drop summary:focus-visible{outline:2px solid var(--brass); outline-offset:-2px}
+details.drop .dt{flex:1 1 auto; min-width:0}
+details.drop .dt h3{font-size:22px; font-weight:600; margin:0; letter-spacing:.005em}
+details.drop .dt p{font-size:13px; color:var(--ink-3); margin:3px 0 0}
+details.drop .chev{flex:0 0 auto; width:11px; height:11px; border-right:2px solid var(--ink-3);
+  border-bottom:2px solid var(--ink-3); transform:rotate(45deg); margin-right:4px;
+  transition:transform .18s ease}
+details.drop[open] .chev{transform:rotate(225deg)}
+details.drop[open] summary{border-bottom:1px solid var(--line-soft)}
+.dbody{padding:20px 22px 24px}
+.dintro{font-size:14px; color:var(--ink-2); margin:0 0 16px; max-width:70ch}
+.dintro strong{color:var(--ink); font-weight:600}
+
+.costbox{background:var(--sunken); border:1px solid var(--line-soft); border-radius:4px;
+  padding:14px 17px; margin:0 0 18px}
+.costbox .cl{display:block; font-size:10.5px; letter-spacing:.13em; text-transform:uppercase;
+  color:var(--ink-3); font-weight:600; margin-bottom:8px}
+.cfx{font-family:"IBM Plex Mono",monospace; font-size:13.5px; line-height:1.9; color:var(--ink-2)}
+.cfx b{color:var(--brass); font-weight:600}
+
+ol.rules{list-style:none; margin:0; padding:0; display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(340px,1fr)); gap:20px 28px}
+ol.rules li{display:flex; gap:14px; align-items:flex-start}
+ol.rules .rn{flex:0 0 auto; width:27px; height:27px; border-radius:50%;
   background:var(--brass-wash); color:var(--brass);
-  font:600 13px/25px "IBM Plex Mono",monospace; text-align:center}
-ol.rules p{font-size:13.5px; color:var(--ink-2); margin:0 0 8px; line-height:1.55}
-ol.rules p:last-child{margin-bottom:0}
+  font:600 13px/27px "IBM Plex Mono",monospace; text-align:center}
+ol.rules .rc{min-width:0}
+ol.rules h4{font-family:"Barlow Condensed",sans-serif; font-size:19px; font-weight:600;
+  margin:1px 0 5px; color:var(--ink); letter-spacing:.01em}
+ol.rules p{font-size:13.5px; color:var(--ink-2); margin:0; line-height:1.6}
 ol.rules p strong{color:var(--ink); font-weight:600}
-ol.rules p.amend{font-size:12.5px; color:var(--ink-3); padding-top:8px;
+ol.rules p.amend{font-size:12.5px; color:var(--ink-3); margin-top:9px; padding-top:9px;
   border-top:1px solid var(--line-soft)}
+
+.twocol{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:14px 32px}
+h4.mini{font-family:"Barlow Condensed",sans-serif; font-size:13px; font-weight:600;
+  letter-spacing:.13em; text-transform:uppercase; color:var(--ink-3);
+  margin:0 0 6px; padding-bottom:7px; border-bottom:1px solid var(--line-soft)}
+
 .grouphd{font-family:"Barlow Condensed",sans-serif; font-size:15px; font-weight:600;
   letter-spacing:.13em; text-transform:uppercase; color:var(--ink-3);
   margin:30px 0 13px; padding-bottom:7px; border-bottom:1px solid var(--line)}
@@ -323,97 +355,121 @@ ol.rules p.amend{font-size:12.5px; color:var(--ink-3); padding-top:8px;
 </section>
 
 <section>
-  <div class="shead"><h2>League info</h2><span class="note">The stuff people ask every year</span></div>
+  <div class="shead"><h2>League info</h2><span class="note">Tap a card to open it</span></div>
 
-  <h3 class="grouphd">Keeper rules &mdash; all nine</h3>
-  <p class="lede" style="margin-bottom:16px">Complete redraft, but you may keep <strong>one</strong> player from last season, who then uses one of your draft picks. Keeping is optional &mdash; one player or none, and there's no penalty for passing.</p>
-  <ol class="rules">
-    <li><span class="rn">1</span><div><p>The player has to be <strong>on your roster already</strong>.</p></div></li>
-    <li><span class="rn">2</span><div><p>He has to have been <strong>drafted in the 4th round or later</strong> (5th, 6th, 7th, 8th &hellip; and so on), or gone <strong>undrafted</strong>.</p></div></li>
-    <li><span class="rn">3</span><div><p>A keeper uses a draft pick <strong>1 round earlier</strong> than the round he was drafted in the previous season. Keep a 4th-round pick, and he becomes your 3rd-round pick.</p></div></li>
-    <li><span class="rn">4</span><div><p>If the player went <strong>undrafted</strong> that season, keeping him costs your <strong>7th round pick</strong>. If he was drafted by anyone that season, his cost comes off <strong>that</strong> draft round &mdash; even if you picked him up off waivers, free agency, or by trade.</p><p class="amend">Updated Aug 2026. The old wording bundled &ldquo;waiver/undrafted&rdquo; together and read as though any waiver pickup paid a flat 7th &mdash; which made a late-round wire find <em>more</em> expensive, not less.</p></div></li>
-    <li><span class="rn">5</span><div><p>Keep the <strong>same player two years running</strong> and he uses a pick <strong>2 rounds earlier</strong> than the round he was originally drafted. A 4th-round pick goes to your 3rd in year one, your 2nd in year two.</p><p class="amend">Same arithmetic as applying rule 3 twice &mdash; year one already moved him a round.</p></div></li>
-    <li><span class="rn">6</span><div><p><strong>Two years max</strong> on any one player.</p><p class="amend">The clock follows the <strong>manager</strong>, not the player. If someone else already used two years on him, you can pick him up and get your own two.</p></div></li>
-    <li><span class="rn">7</span><div><p>If your keeper <strong>gets injured</strong>, you can swap him out for a different player. All the same rules apply &mdash; the replacement is priced on <em>his own</em> history, so a swap can cost more than what it replaces.</p><p class="amend">The injured player doesn't burn a year, and the replacement starts his own first year.</p></div></li>
-    <li><span class="rn">8</span><div><p>You <strong>don't have to drop anyone</strong>. Tell the commissioner who you want and he sets it in the draft.</p></div></li>
-    <li><span class="rn">9</span><div><p>Keeper picks are due by the <strong>deadline</strong> &mdash; Saturday August 29th 2026 at 7:00 PM Pacific for this season.</p></div></li>
-  </ol>
+  <details class="drop">
+    <summary>
+      <div class="dt"><h3>Keeper rules</h3><p>All nine &middot; what a keeper costs &middot; the two-year clock</p></div>
+      <span class="chev" aria-hidden="true"></span>
+    </summary>
+    <div class="dbody">
+      <p class="dintro">Complete redraft, but you may keep <strong>one</strong> player from last season, who then uses one of your draft picks. Keeping is optional &mdash; one player or none, no penalty for passing.</p>
 
-  <div class="cols" style="margin-top:20px">
-    <div class="card">
-      <h3>The cost, in short</h3>
-      <p class="h-note">Rules 3, 4 and 5 in two lines</p>
-      <div class="rulebox"><div class="fx">
-        went undrafted &nbsp;&rarr;&nbsp; <b>round 7</b><br>
-        drafted by anyone &nbsp;&rarr;&nbsp; <b>that round &minus; 1</b>
-      </div></div>
-      <p>Second straight year moves it another round earlier. How he reached your roster never matters &mdash; only whether anyone drafted him.</p>
-    </div>
-    <div class="card">
-      <h3>Ties, and the standings</h3>
-      <p class="h-note">For the wheel, not the keepers</p>
-      <p>Finish with the same record as someone else and the <strong>Sleeper standings</strong> settle it. The app already ranks ties on total points for, so whatever it shows is the finish &mdash; nothing to compute or argue.</p>
-    </div>
-  </div>
+      <div class="costbox">
+        <span class="cl">What it costs</span>
+        <div class="cfx">went undrafted <b>&rarr; round 7</b></div>
+        <div class="cfx">drafted by anyone <b>&rarr; that round &minus; 1</b></div>
+      </div>
 
-  <h3 class="grouphd">Draft order for next year</h3>
-  <div class="cols">
-    <div class="card">
-      <h3>Spin the wheel</h3>
-      <p class="h-note">2027 order, off your 2026 regular-season finish</p>
-      <p>Everyone gets spots on the wheel by where they finish. Worse finish, more spots. <strong>47 spots</strong> in total.</p>
-      <div class="stat"><span class="k">10th place</span><span class="v">14 spots</span></div>
-      <div class="stat"><span class="k">9th</span><span class="v">10</span></div>
-      <div class="stat"><span class="k">8th</span><span class="v">7</span></div>
-      <div class="stat"><span class="k">7th</span><span class="v">5</span></div>
-      <div class="stat"><span class="k">6th through 1st</span><span class="v">1 each</span></div>
-      <div class="stat"><span class="k">Consolation winner</span><span class="v">+5</span></div>
-      <p style="margin-top:13px">Same record as someone else? The Sleeper standings settle it &mdash; the app already ranks ties on total points for, so whatever it shows is the finish.</p>
+      <ol class="rules">
+        <li><span class="rn">1</span><div class="rc">
+          <h4>On your roster</h4>
+          <p>The player has to already be on your roster.</p></div></li>
+        <li><span class="rn">2</span><div class="rc">
+          <h4>Round 4 or later</h4>
+          <p>He has to have been drafted in the 4th round or later &mdash; or gone undrafted entirely.</p></div></li>
+        <li><span class="rn">3</span><div class="rc">
+          <h4>One round earlier</h4>
+          <p>A keeper uses a pick one round earlier than where he was drafted last season. Keep a 4th-rounder and he becomes your 3rd-round pick.</p></div></li>
+        <li><span class="rn">4</span><div class="rc">
+          <h4>Undrafted costs a 7th</h4>
+          <p>If he went undrafted that season, keeping him costs your 7th-round pick. If <em>anyone</em> drafted him, his cost comes off that round instead &mdash; even if you got him off waivers, free agency or a trade.</p>
+          <p class="amend">Updated Aug 2026. The old wording read as though any waiver pickup paid a flat 7th, which made a late-round wire find more expensive rather than less.</p></div></li>
+        <li><span class="rn">5</span><div class="rc">
+          <h4>Second year, one more round</h4>
+          <p>Keep the same player two years running and he costs two rounds earlier than his original draft round. A 4th-rounder goes to your 3rd, then your 2nd.</p></div></li>
+        <li><span class="rn">6</span><div class="rc">
+          <h4>Two years maximum</h4>
+          <p>Two seasons is the limit on any one player &mdash; and the clock follows the <strong>manager</strong>, not the player. If someone else already used their two years on him, you can pick him up and get your own two.</p></div></li>
+        <li><span class="rn">7</span><div class="rc">
+          <h4>Injury swap allowed</h4>
+          <p>If your keeper gets hurt you can swap him for another player off your roster. The replacement is priced on <em>his own</em> history, so a swap can cost more than what it replaces. The injured player doesn't burn a year.</p></div></li>
+        <li><span class="rn">8</span><div class="rc">
+          <h4>Nobody gets dropped</h4>
+          <p>You don't have to drop anyone. Tell KillaTae17 who you want and he sets it in the draft.</p></div></li>
+        <li><span class="rn">9</span><div class="rc">
+          <h4>The deadline</h4>
+          <p>Keeper picks are due before the deadline &mdash; Saturday August 29th 2026 at 7:00 PM Pacific this season.</p></div></li>
+      </ol>
     </div>
-    <div class="card">
-      <h3>Your odds at pick one</h3>
-      <p class="h-note">200,000 simulated spins</p>
-      <div class="stat"><span class="k">10th &mdash; 14 spots</span><span class="v">29.8%</span></div>
-      <div class="stat"><span class="k">9th &mdash; 10</span><span class="v">21.3%</span></div>
-      <div class="stat"><span class="k">7th + consolation &mdash; 10</span><span class="v">21.3%</span></div>
-      <div class="stat"><span class="k">8th &mdash; 7</span><span class="v">14.9%</span></div>
-      <div class="stat"><span class="k">6th&ndash;1st &mdash; 1 each</span><span class="v">2.1%</span></div>
-      <div class="stat"><span class="k">10th <em>and</em> consolation &mdash; 19</span><span class="v">40.4%</span></div>
-    </div>
-    <div class="card">
-      <h3>Tank penalty</h3>
-      <p class="h-note">Live from week 10</p>
-      <p>From week 10 on, every week you leave a starting spot <strong>empty</strong>, or start someone listed <strong>IR, OUT or on BYE</strong>, costs you <strong>2 wheel spots</strong> off your season total.</p>
-      <p>Lineups have to be set 90 minutes before kickoff &mdash; use auto-subs. If a player is ruled out inside that 90 minutes, it doesn't count against you.</p>
-    </div>
-  </div>
+  </details>
 
-  <h3 class="grouphd">Money</h3>
-  <div class="cols">
-    <div class="card">
-      <h3>Buy-in</h3>
-      <p class="h-note">Due before the draft</p>
-      <div class="rulebox" style="margin-bottom:13px"><div class="fx" style="font-size:24px;line-height:1.2">
-        <b>$110</b> a team
-      </div></div>
-      <p>Ten teams, so the pot is <strong>$1,100</strong>. A thousand of it goes straight back out as payouts; the last hundred covers the trophy.</p>
-      <p>Get it to <strong>KillaTae17</strong> before draft night.</p>
+  <details class="drop">
+    <summary>
+      <div class="dt"><h3>Draft order for next year</h3><p>Spin the wheel &middot; your odds &middot; the tank penalty</p></div>
+      <span class="chev" aria-hidden="true"></span>
+    </summary>
+    <div class="dbody">
+      <p class="dintro">The 2027 draft order comes off your <strong>2026 regular-season finish</strong>. Worse finish, more spots on the wheel &mdash; <strong>47</strong> in total.</p>
+      <div class="twocol">
+        <div>
+          <h4 class="mini">Spots on the wheel</h4>
+          <div class="stat"><span class="k">10th place</span><span class="v">14</span></div>
+          <div class="stat"><span class="k">9th</span><span class="v">10</span></div>
+          <div class="stat"><span class="k">8th</span><span class="v">7</span></div>
+          <div class="stat"><span class="k">7th</span><span class="v">5</span></div>
+          <div class="stat"><span class="k">6th through 1st</span><span class="v">1 each</span></div>
+          <div class="stat"><span class="k">Consolation winner</span><span class="v">+5</span></div>
+        </div>
+        <div>
+          <h4 class="mini">Odds of pick one</h4>
+          <div class="stat"><span class="k">10th &mdash; 14 spots</span><span class="v">29.8%</span></div>
+          <div class="stat"><span class="k">9th &mdash; 10</span><span class="v">21.3%</span></div>
+          <div class="stat"><span class="k">7th + consolation</span><span class="v">21.3%</span></div>
+          <div class="stat"><span class="k">8th &mdash; 7</span><span class="v">14.9%</span></div>
+          <div class="stat"><span class="k">6th&ndash;1st &mdash; 1 each</span><span class="v">2.1%</span></div>
+          <div class="stat"><span class="k">10th <em>and</em> consolation</span><span class="v">40.4%</span></div>
+        </div>
+      </div>
+      <ol class="rules" style="margin-top:20px">
+        <li><span class="rn">&#9888;</span><div class="rc">
+          <h4>Tank penalty</h4>
+          <p>From <strong>week 10</strong> on, every week you leave a starting spot empty &mdash; or start someone listed IR, OUT or on BYE &mdash; costs you <strong>2 wheel spots</strong> off your season total.</p>
+          <p class="amend">Lineups must be set 90 minutes before kickoff; use auto-subs. A player ruled out inside that 90 minutes doesn't count against you.</p></div></li>
+        <li><span class="rn">=</span><div class="rc">
+          <h4>Tied records</h4>
+          <p>The <strong>Sleeper standings</strong> settle it. The app already ranks ties on total points for, so whatever it shows is the finish &mdash; nothing to compute or argue.</p></div></li>
+      </ol>
     </div>
-    <div class="card">
-      <h3>Payouts</h3>
-      <p class="h-note">Where the $1,100 lands</p>
-      <div class="stat"><span class="k">1st place &mdash; and the trophy</span><span class="v">$650</span></div>
-      <div class="stat"><span class="k">2nd place</span><span class="v">$250</span></div>
-      <div class="stat"><span class="k">3rd place</span><span class="v">$100</span></div>
-      <div class="stat"><span class="k">Trophy</span><span class="v">$100</span></div>
-      <div class="stat"><span class="k">Total</span><span class="v">$1,100</span></div>
+  </details>
+
+  <details class="drop">
+    <summary>
+      <div class="dt"><h3>Money</h3><p>$110 buy-in &middot; $650 / $250 / $100 &middot; MVP prize</p></div>
+      <span class="chev" aria-hidden="true"></span>
+    </summary>
+    <div class="dbody">
+      <div class="costbox">
+        <span class="cl">Buy-in</span>
+        <div class="cfx"><b>$110</b> a team &mdash; ten teams, <b>$1,100</b> pot</div>
+      </div>
+      <p class="dintro">Get it to <strong>KillaTae17</strong> before draft night.</p>
+      <div class="twocol">
+        <div>
+          <h4 class="mini">Payouts</h4>
+          <div class="stat"><span class="k">1st &mdash; and the trophy</span><span class="v">$650</span></div>
+          <div class="stat"><span class="k">2nd</span><span class="v">$250</span></div>
+          <div class="stat"><span class="k">3rd</span><span class="v">$100</span></div>
+          <div class="stat"><span class="k">Toward the trophy</span><span class="v">$100</span></div>
+          <div class="stat"><span class="k">Full pot</span><span class="v">$1,100</span></div>
+        </div>
+        <div>
+          <h4 class="mini">League MVP</h4>
+          <p style="font-size:13.5px;color:var(--ink-2);margin:0">Separate from the payouts. The MVP picks one: a <strong>mini helmet</strong>, or <strong>four months of RedZone</strong> next season.</p>
+        </div>
+      </div>
     </div>
-    <div class="card">
-      <h3>League MVP</h3>
-      <p class="h-note">Separate from the payouts</p>
-      <p>The MVP picks one: a <strong>mini helmet</strong>, or <strong>four months of RedZone</strong> next season.</p>
-    </div>
-  </div>
+  </details>
 </section>
 
 <footer>
