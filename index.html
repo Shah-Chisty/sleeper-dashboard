@@ -299,26 +299,25 @@ h4.mini{font-family:"Barlow Condensed",sans-serif; font-size:13px; font-weight:6
 
 <section style="margin-top:8px">
   <div class="shead"><h2>The keepers</h2><span class="note">9 declared, 1 passed</span></div>
-  <p class="lede">A keeper uses a real pick, so those slots are gone before the draft starts. Value compares the pick it costs against where that player normally goes &mdash; positive means you're getting him later than the market does.</p>
+  <p class="lede">Keepers use real picks, so those slots are gone before the draft starts.</p>
   <div class="tablescroll"><table class="data" id="kt">
     <thead><tr><th>Manager</th><th>Keeper</th><th>Costs</th><th>Came from</th><th style="text-align:right">ADP</th><th style="text-align:right">Value</th></tr></thead>
     <tbody></tbody></table></div>
-  <div class="method">Value = the pick a keeper costs, minus that player's ESPN PPR average draft position. Christian Watson at pick 61 against a 94.5 ADP is &minus;34: he'd likely have been there 33 picks later. It's a market comparison, not a prediction &mdash; ADP is where people draft, not how players finish.</div>
+  <div class="method">Value = pick number &minus; ESPN PPR average draft position. Where people draft him, not how he finishes.</div>
 </section>
 
 <section>
   <div class="shead"><h2>Ranked</h2><span class="note">Which keepers actually gain the most</span></div>
-  <p class="lede">The <em>Value</em> column in the table above just measures how far down the board you're getting someone. A late-round keeper always scores well there, because everything looks like a bargain at pick 93 &mdash; it says nothing about whether the player is actually any good.</p>
-  <p class="lede">So this ranks something more useful: <strong>how many more points a keeper gives you than the best player you could have drafted with that same pick.</strong> Loveland has the best Value score on the board, but he ranks third here, because a tight end who beats his replacement by 37 points is worth less than Rashee Rice beating his by 65.</p>
+  <p class="lede">Value only shows how <em>late</em> you got someone. This shows how much <strong>better</strong> he is than whoever else you'd have taken at that pick.</p>
   <div class="tablescroll"><table class="data" id="rk">
     <thead><tr><th>#</th><th>Keeper</th><th>Manager</th><th>Costs</th><th style="text-align:right">Proj</th><th style="text-align:right">Edge</th><th>Best alternative there</th></tr></thead>
     <tbody></tbody></table></div>
-  <div class="method">Every player is measured against replacement level at his own position &mdash; QB 292, WR 196, RB 193, TE 169 &mdash; because raw points don't compare across positions in a one-QB league. Kickers and defenses are left out; they're streamed, not drafted. Projections are ESPN's.</div>
+  <div class="method">Measured against replacement at each position &mdash; QB 292, WR 196, RB 193, TE 169. ESPN projections. Kickers and defenses left out.</div>
 </section>
 
 <section>
   <div class="shead"><h2>The board</h2><span class="note">15 rounds, snake</span></div>
-  <p class="lede">Keepers are burned in at the pick they cost. Odd rounds run left to right, even rounds right to left.</p>
+  <p class="lede">Odd rounds run left to right, even rounds right to left.</p>
   <div class="gridtools">
     <button class="seg" id="b-keep" aria-pressed="true">Keepers</button>
     <button class="seg" id="b-mine" aria-pressed="false">My picks</button>
@@ -333,7 +332,7 @@ h4.mini{font-family:"Barlow Condensed",sans-serif; font-size:13px; font-weight:6
 
 <section>
   <div class="shead"><h2>The two-year clock</h2><span class="note">Who you can keep again in 2027</span></div>
-  <p class="lede">You get two years with a player, and the limit follows the <strong>manager</strong>, not the player &mdash; somebody else's expired keeper is a clean slate for you. Everyone below is in year one, so 2027 is the last year on him.</p>
+  <p class="lede">Everyone below is in year one &mdash; 2027 is their last.</p>
   <div class="tablescroll"><table class="data" id="ct">
     <thead><tr><th>Player</th><th>Manager</th><th>Kept</th><th>Status</th><th style="text-align:right">2027 cost</th></tr></thead>
     <tbody></tbody></table></div>
@@ -356,7 +355,7 @@ h4.mini{font-family:"Barlow Condensed",sans-serif; font-size:13px; font-weight:6
       <span class="chev" aria-hidden="true"></span>
     </summary>
     <div class="dbody">
-      <p class="dintro">Complete redraft, but you may keep <strong>one</strong> player from last season, who then uses one of your draft picks. Keeping is optional &mdash; one player or none, no penalty for passing.</p>
+      <p class="dintro">Keep <strong>one</strong> player from last season, or none. He uses one of your picks.</p>
 
       <div class="costbox">
         <span class="cl">What it costs</span>
@@ -367,32 +366,32 @@ h4.mini{font-family:"Barlow Condensed",sans-serif; font-size:13px; font-weight:6
       <ol class="rules">
         <li><span class="rn">1</span><div class="rc">
           <h4>On your roster</h4>
-          <p>The player has to already be on your roster.</p></div></li>
+          <p>He has to be on your roster.</p></div></li>
         <li><span class="rn">2</span><div class="rc">
           <h4>Round 4 or later</h4>
-          <p>He has to have been drafted in the 4th round or later &mdash; or gone undrafted entirely.</p></div></li>
+          <p>Drafted round 4 or later, or undrafted.</p></div></li>
         <li><span class="rn">3</span><div class="rc">
           <h4>One round earlier</h4>
-          <p>A keeper uses a pick one round earlier than where he was drafted last season. Keep a 4th-rounder and he becomes your 3rd-round pick.</p></div></li>
+          <p>One round earlier than where he was drafted. A 4th-rounder becomes your 3rd.</p></div></li>
         <li><span class="rn">4</span><div class="rc">
           <h4>Undrafted costs a 7th</h4>
-          <p>If he went undrafted that season, keeping him costs your 7th-round pick. If <em>anyone</em> drafted him, his cost comes off that round instead &mdash; even if you got him off waivers, free agency or a trade.</p>
-          <p class="amend">Updated Aug 2026. The old wording read as though any waiver pickup paid a flat 7th, which made a late-round wire find more expensive rather than less.</p></div></li>
+          <p>Undrafted? He costs your 7th. Drafted by anyone? That round minus one &mdash; however you got him.</p>
+          <p class="amend">Updated Aug 2026.</p></div></li>
         <li><span class="rn">5</span><div class="rc">
           <h4>Second year, one more round</h4>
-          <p>Keep the same player two years running and he costs two rounds earlier than his original draft round. A 4th-rounder goes to your 3rd, then your 2nd.</p></div></li>
+          <p>Two rounds earlier than his original round. A 4th goes to your 3rd, then your 2nd.</p></div></li>
         <li><span class="rn">6</span><div class="rc">
           <h4>Two years maximum</h4>
-          <p>Two seasons is the limit on any one player &mdash; and the clock follows the <strong>manager</strong>, not the player. If someone else already used their two years on him, you can pick him up and get your own two.</p></div></li>
+          <p>The clock follows the <strong>manager</strong>. Someone else's expired keeper is fresh for you.</p></div></li>
         <li><span class="rn">7</span><div class="rc">
           <h4>Injury swap allowed</h4>
-          <p>If your keeper gets hurt you can swap him for another player off your roster. The replacement is priced on <em>his own</em> history, so a swap can cost more than what it replaces. The injured player doesn't burn a year.</p></div></li>
+          <p>Swap him for anyone on your roster. The replacement is priced on <em>his own</em> history.</p></div></li>
         <li><span class="rn">8</span><div class="rc">
           <h4>Nobody gets dropped</h4>
-          <p>You don't have to drop anyone. Tell KillaTae17 who you want and he sets it in the draft.</p></div></li>
+          <p>Tell KillaTae17 who you want. He sets it.</p></div></li>
         <li><span class="rn">9</span><div class="rc">
           <h4>The deadline</h4>
-          <p>Keeper picks are due before the deadline &mdash; Saturday August 29th 2026 at 7:00 PM Pacific this season.</p></div></li>
+          <p>Sat Aug 29, 7:00 PM Pacific.</p></div></li>
       </ol>
     </div>
   </details>
@@ -403,7 +402,7 @@ h4.mini{font-family:"Barlow Condensed",sans-serif; font-size:13px; font-weight:6
       <span class="chev" aria-hidden="true"></span>
     </summary>
     <div class="dbody">
-      <p class="dintro">The 2027 draft order comes off your <strong>2026 regular-season finish</strong>. Worse finish, more spots on the wheel &mdash; <strong>47</strong> in total.</p>
+      <p class="dintro">Off your <strong>2026 finish</strong>. Worse finish, more spots &mdash; 47 total.</p>
       <div class="twocol">
         <div>
           <h4 class="mini">Spots on the wheel</h4>
@@ -427,11 +426,11 @@ h4.mini{font-family:"Barlow Condensed",sans-serif; font-size:13px; font-weight:6
       <ol class="rules" style="margin-top:20px">
         <li><span class="rn">&#9888;</span><div class="rc">
           <h4>Tank penalty</h4>
-          <p>From <strong>week 10</strong> on, every week you leave a starting spot empty &mdash; or start someone listed IR, OUT or on BYE &mdash; costs you <strong>2 wheel spots</strong> off your season total.</p>
-          <p class="amend">Lineups must be set 90 minutes before kickoff; use auto-subs. A player ruled out inside that 90 minutes doesn't count against you.</p></div></li>
+          <p>From <strong>week 10</strong>, each week you start an empty slot &mdash; or an IR, OUT or BYE player &mdash; costs <strong>2 wheel spots</strong>.</p>
+          <p class="amend">Set lineups 90 minutes before kickoff.</p></div></li>
         <li><span class="rn">=</span><div class="rc">
           <h4>Tied records</h4>
-          <p>The <strong>Sleeper standings</strong> settle it. The app already ranks ties on total points for, so whatever it shows is the finish &mdash; nothing to compute or argue.</p></div></li>
+          <p>The <strong>Sleeper standings</strong> settle it &mdash; the app already ranks ties on points for.</p></div></li>
       </ol>
     </div>
   </details>
