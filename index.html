@@ -304,7 +304,7 @@ h4.mini{font-family:"Barlow Condensed",sans-serif; font-size:13px; font-weight:6
 </div>
 
 <section style="margin-top:8px">
-  <div class="shead"><h2>The keepers</h2><span class="note">9 declared, 1 passed</span></div>
+  <div class="shead"><h2>The keepers</h2><span class="note">9 declared, 1 opted out</span></div>
   <p class="lede">Keepers use real picks, so those slots are gone before the draft starts.</p>
   <div class="tablescroll"><table class="data" id="kt">
     <thead><tr><th>Manager</th><th>Keeper</th><th>Costs</th><th>Came from</th><th style="text-align:right">ADP</th><th style="text-align:right">Value</th></tr></thead>
@@ -545,7 +545,7 @@ function slotOf(mgr){ const t = DATA.teams.find(t=>t.mgr===mgr); return t ? t.sl
     const tr = document.createElement('tr');
     tr.dataset.mgr = m;
     tr.innerHTML = '<td class="who" data-mgr="'+esc(m)+'" style="color:var(--ink-3)">'+mgrCell(m,false)+'</td>'+
-      '<td colspan="5" style="color:var(--ink-3);font-size:13px">Passed &mdash; keeping is optional. Drafts a full 15.</td>';
+      '<td colspan="5" style="color:var(--ink-3);font-size:13px">Opted out &mdash; keeping is optional. Drafts a full 15.</td>';
     tb.appendChild(tr);
   });
 })();
