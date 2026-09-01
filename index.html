@@ -865,6 +865,21 @@ paint();
         (c.c200 ? c.c200 + '&times; 200 &middot; ' : '') + 'best ' + c.best.toFixed(1),
         c.avg.toFixed(1), 'avg week', {here:c.here}))
     },
+    wl: {
+      label: 'Best records',
+      note: 'Top five by win rate, counting every week ever played &mdash; playoffs '
+          + 'included. Sleeper\'s own standings count the regular season only, so the '
+          + 'numbers there run a few games lighter.',
+      render: () => R.career
+        .map(c => Object.assign({}, c, {pct: c.w + c.l ? c.w / (c.w + c.l) : 0}))
+        // ties on record broken by total points, the same way a season is
+        .sort((a, b) => b.pct - a.pct || b.pts - a.pts)
+        .slice(0, 5)
+        .map((c, i) => row(i, c.mgr,
+          (100 * c.pct).toFixed(1) + '% &middot; ' + (c.w + c.l) + ' games &middot; '
+            + c.avg.toFixed(1) + ' a week',
+          c.w + '&ndash;' + c.l, 'all-time', {here: c.here}))
+    },
     low: {
       label: 'Rough weeks',
       note: 'Posted in public so nobody forgets.',
