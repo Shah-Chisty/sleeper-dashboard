@@ -571,7 +571,11 @@ const pickNo = (rd, slot) => (rd-1)*DATA.ask.teams + (rd%2 ? slot : DATA.ask.tea
     DATA.none.length ? DATA.none.join(', ') + ' opted out' : 'everyone declared',
     '<b>Best value: ' + best.player + ' ' + (best.value>=0?'+':'') + best.value + '</b>',
     'Worst: ' + worst.player + ' ' + (worst.value>=0?'+':'') + worst.value,
-    '<b>Nacua final year with BOLOyeung757</b>'
+    (function(){
+      const done = DATA.clock.filter(c => c.expired)[0];
+      return done ? '<b>' + done.player + ' cannot be kept again by ' + done.mgr + '</b>'
+                  : 'every keeper has a year left';
+    })()
   ];
   document.getElementById('tickr').innerHTML =
     bits.join(' &nbsp;&bull;&nbsp; ') + ' &nbsp;&bull;&nbsp; ';
