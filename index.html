@@ -76,7 +76,7 @@ a{color:var(--blue2)}
 .cdcell span{display:block; font:700 9.5px Archivo; letter-spacing:.16em; text-transform:uppercase;
   color:var(--t3); margin-top:7px}
 .cdcell.sec b{color:var(--yellow)}
-.cdcell.sec.tick b{animation:sectick .5s ease-out}
+.cdcell.sec.pulse b{animation:sectick .5s ease-out}
 @keyframes sectick{0%{opacity:.45; transform:translateY(-2px)}100%{opacity:1; transform:none}}
 .cdband.soon .cdcell.sec b,.cdband.soon .cdcell b{color:var(--red)}
 
@@ -615,7 +615,7 @@ const pickNo = (rd, slot) => (rd-1)*DATA.ask.teams + (rd%2 ? slot : DATA.ask.tea
       el.m.textContent = pad(m); el.s.textContent = pad(sec);
     }
     if(secCell && !reduce && sec !== last){
-      secCell.classList.remove('tick'); void secCell.offsetWidth; secCell.classList.add('tick');
+      secCell.classList.remove('pulse'); void secCell.offsetWidth; secCell.classList.add('pulse');
     }
     last = sec;
 
