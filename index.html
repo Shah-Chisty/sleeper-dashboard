@@ -162,10 +162,6 @@ table.data td.num{text-align:right; white-space:nowrap}
 .rulebox .fx{font-family:"IBM Plex Mono",monospace; font-size:13px; line-height:1.75; color:var(--ink)}
 .rulebox .fx b{color:var(--brass); font-weight:600}
 
-ul.tight{margin:0; padding-left:0; list-style:none; display:flex; flex-direction:column; gap:11px}
-ul.tight li{font-size:13.5px; color:var(--ink-2); padding-left:16px; position:relative; line-height:1.5}
-ul.tight li::before{content:""; position:absolute; left:0; top:8px; width:5px; height:5px; border-radius:50%; background:var(--brass)}
-ul.tight li b{color:var(--ink); font-weight:600}
 
 .stat{display:flex; justify-content:space-between; align-items:baseline; gap:14px;
   padding:9px 0; border-bottom:1px solid var(--line-soft); font-size:13.5px}
@@ -272,10 +268,6 @@ h4.mini{font-family:"Barlow Condensed",sans-serif; font-size:13px; font-weight:6
   letter-spacing:.13em; text-transform:uppercase; color:var(--ink-3);
   margin:0 0 6px; padding-bottom:7px; border-bottom:1px solid var(--line-soft)}
 
-.grouphd{font-family:"Barlow Condensed",sans-serif; font-size:15px; font-weight:600;
-  letter-spacing:.13em; text-transform:uppercase; color:var(--ink-3);
-  margin:30px 0 13px; padding-bottom:7px; border-bottom:1px solid var(--line)}
-.grouphd:first-of-type{margin-top:20px}
 .method{font-size:12.5px; color:var(--ink-3); background:var(--sunken); border:1px solid var(--line-soft);
   border-radius:3px; padding:12px 14px; margin-top:14px; line-height:1.6}
 .soon{text-align:center; padding:34px 20px; border:1px dashed var(--line); border-radius:4px; background:var(--surface)}
@@ -316,7 +308,8 @@ h4.mini{font-family:"Barlow Condensed",sans-serif; font-size:13px; font-weight:6
 
 <section>
   <div class="shead"><h2>Ranked</h2><span class="note">Which keepers actually gain the most</span></div>
-  <p class="lede">Value against ADP flatters late keepers just for being late. This asks a better question: how many projected points does a keeper give you over the best player who'd still be on the board at that same pick?</p>
+  <p class="lede">The <em>Value</em> column in the table above just measures how far down the board you're getting someone. A late-round keeper always scores well there, because everything looks like a bargain at pick 93 &mdash; it says nothing about whether the player is actually any good.</p>
+  <p class="lede">So this ranks something more useful: <strong>how many more points a keeper gives you than the best player you could have drafted with that same pick.</strong> Loveland has the best Value score on the board, but he ranks third here, because a tight end who beats his replacement by 37 points is worth less than Rashee Rice beating his by 65.</p>
   <div class="tablescroll"><table class="data" id="rk">
     <thead><tr><th>#</th><th>Keeper</th><th>Manager</th><th>Costs</th><th style="text-align:right">Proj</th><th style="text-align:right">Edge</th><th>Best alternative there</th></tr></thead>
     <tbody></tbody></table></div>
