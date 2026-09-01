@@ -55,6 +55,34 @@ a{color:var(--blue2)}
 .nav .cd b{font-family:Anton; font-size:22px; color:var(--yellow); line-height:1}
 .nav .cd span{font:600 10px Archivo; letter-spacing:.14em; text-transform:uppercase; color:var(--t3)}
 
+.cdband{background:var(--card); border:1px solid var(--line); border-radius:20px;
+  padding:20px; position:relative; overflow:hidden}
+.cdband::before{content:""; position:absolute; inset:0 0 auto; height:4px;
+  background:linear-gradient(90deg,var(--blue) 0 33%,var(--yellow) 33% 66%,var(--red) 66%)}
+.cdtop{display:flex; justify-content:space-between; align-items:flex-start; gap:14px;
+  flex-wrap:wrap; margin:6px 0 16px}
+.cdlbl{font:700 10px Archivo; letter-spacing:.22em; text-transform:uppercase; color:var(--t3)}
+.cdwhen{font-family:Anton; font-size:23px; color:var(--t1); margin-top:5px; line-height:1.1}
+.cdstate{font:700 11px Archivo; letter-spacing:.1em; text-transform:uppercase;
+  padding:7px 12px; border-radius:9px; background:rgba(47,123,255,.16); color:var(--blue2);
+  white-space:nowrap}
+.cdstate.live{background:rgba(46,224,106,.16); color:var(--green)}
+.cdstate.done{background:var(--bg); color:var(--t3)}
+.cdgrid{display:grid; grid-template-columns:repeat(4,1fr); gap:10px}
+.cdcell{background:var(--bg); border:1px solid var(--line); border-radius:14px;
+  padding:15px 8px 12px; text-align:center}
+.cdcell b{display:block; font-family:Anton; font-size:clamp(30px,7vw,52px); line-height:.92;
+  color:var(--t1); font-variant-numeric:tabular-nums; letter-spacing:.01em}
+.cdcell span{display:block; font:700 9.5px Archivo; letter-spacing:.16em; text-transform:uppercase;
+  color:var(--t3); margin-top:7px}
+.cdcell.sec b{color:var(--yellow)}
+.cdcell.sec.tick b{animation:sectick .5s ease-out}
+@keyframes sectick{0%{opacity:.45; transform:translateY(-2px)}100%{opacity:1; transform:none}}
+.cdband.soon .cdcell.sec b,.cdband.soon .cdcell b{color:var(--red)}
+@media (max-width:520px){.cdgrid{gap:7px}.cdcell{padding:12px 4px 9px}
+  .cdcell span{font-size:8.5px; letter-spacing:.1em}}
+.nav .cd b{min-width:0}
+
 /* ---------- generic card ---------- */
 .card{background:var(--card); border:1px solid var(--line); border-radius:20px; padding:20px}
 .card .hd{display:flex; justify-content:space-between; align-items:baseline; gap:14px;
@@ -260,7 +288,8 @@ footer{margin-top:34px; padding-top:20px; border-top:1px solid var(--line); font
 <body>
 <nav class="nav" aria-label="Sections">
   <div class="inner">
-    <a href="#you" class="on">Your team</a>
+    <a href="#countdown" class="on">Countdown</a>
+    <a href="#you">Your team</a>
     <a href="#ask">Ask</a>
     <a href="#keepers">Keepers</a>
     <a href="#ranked">Ranked</a>
@@ -279,6 +308,24 @@ footer{margin-top:34px; padding-top:20px; border-top:1px solid var(--line); font
   <h1>If You Ain't 1st,<br><em>You're Last</em></h1>
   <p class="sub">Ten teams, 15 rounds, snake. One keeper each, optional. $650 / $250 / $100 and a trophy.</p>
 </header>
+
+<section id="countdown" aria-live="off">
+  <div class="cdband">
+    <div class="cdtop">
+      <div>
+        <div class="cdlbl">Draft day</div>
+        <div class="cdwhen" id="cdwhen">&mdash;</div>
+      </div>
+      <div class="cdstate" id="cdstate"></div>
+    </div>
+    <div class="cdgrid" id="cdgrid">
+      <div class="cdcell"><b id="cd-d">--</b><span>Days</span></div>
+      <div class="cdcell"><b id="cd-h">--</b><span>Hours</span></div>
+      <div class="cdcell"><b id="cd-m">--</b><span>Minutes</span></div>
+      <div class="cdcell sec"><b id="cd-s">--</b><span>Seconds</span></div>
+    </div>
+  </div>
+</section>
 
 <section id="you">
   <div class="card">
@@ -449,12 +496,67 @@ const pickNo = (rd, slot) => (rd-1)*DATA.ask.teams + (rd%2 ? slot : DATA.ask.tea
 
 /* ---------------- countdown ---------------- */
 (function(){
-  const days = Math.ceil((DATA.draft.start - Date.now())/86400000);
-  const n = document.getElementById('cdn'), l = document.getElementById('cdl');
-  if(days > 1){ n.textContent = days; l.textContent = 'days to draft'; }
-  else if(days === 1){ n.textContent = '1'; l.textContent = 'day to draft'; }
-  else if(days === 0){ n.textContent = '0'; l.textContent = 'draft today'; }
-  else { n.textContent = '—'; l.textContent = 'draft done'; }
+  const when = DATA.draft.start;
+  const band  = document.querySelector('.cdband');
+  const el = {d:document.getElementById('cd-d'), h:document.getElementById('cd-h'),
+              m:document.getElementById('cd-m'), s:document.getElementById('cd-s')};
+  const secCell = el.s ? el.s.parentElement : null;
+  const navN = document.getElementById('cdn'), navL = document.getElementById('cdl');
+  const state = document.getElementById('cdstate'), whenEl = document.getElementById('cdwhen');
+  const pad = n => String(n).padStart(2,'0');
+  const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if(whenEl){
+    const d = new Date(when);
+    whenEl.textContent = d.toLocaleDateString('en-US',
+      {weekday:'long', month:'long', day:'numeric'}) + ' · ' +
+      d.toLocaleTimeString('en-US',{hour:'numeric', minute:'2-digit'});
+  }
+
+  let last = -1;
+  function tick(){
+    let ms = when - Date.now();
+
+    if(ms <= 0){
+      // The draft runs a few hours; treat that window as "live", then done.
+      const over = -ms > 4*3600*1000;
+      if(el.d){ el.d.textContent = el.h.textContent = el.m.textContent = el.s.textContent = '00'; }
+      if(state){ state.textContent = over ? 'Draft complete' : 'Draft is live';
+                 state.className = 'cdstate ' + (over ? 'done' : 'live'); }
+      if(navN){ navN.textContent = over ? '—' : '•';
+                navL.textContent = over ? 'draft done' : 'drafting now'; }
+      return;
+    }
+
+    const d = Math.floor(ms/86400000); ms -= d*86400000;
+    const h = Math.floor(ms/3600000);  ms -= h*3600000;
+    const m = Math.floor(ms/60000);    ms -= m*60000;
+    const sec = Math.floor(ms/1000);
+
+    if(el.d){
+      el.d.textContent = pad(d); el.h.textContent = pad(h);
+      el.m.textContent = pad(m); el.s.textContent = pad(sec);
+    }
+    if(secCell && !reduce && sec !== last){
+      secCell.classList.remove('tick'); void secCell.offsetWidth; secCell.classList.add('tick');
+    }
+    last = sec;
+
+    // inside 24 hours the whole thing goes red
+    if(band) band.classList.toggle('soon', d === 0);
+
+    if(state){
+      state.textContent = d > 0 ? d + (d===1?' day':' days') + ' out'
+                                : h + 'h ' + m + 'm to go';
+      state.className = 'cdstate' + (d === 0 ? ' live' : '');
+    }
+    if(navN){
+      navN.textContent = d > 0 ? d : pad(h) + ':' + pad(m);
+      navL.textContent = d > 1 ? 'days to draft' : d === 1 ? 'day to draft' : 'to draft';
+    }
+  }
+  tick();
+  setInterval(tick, 1000);
 })();
 
 /* ---------------- ticker ---------------- */
