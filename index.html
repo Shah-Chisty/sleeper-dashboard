@@ -859,8 +859,8 @@ paint();
     },
     career: {
       label: 'All-time',
-      note: 'Every manager who has played, by average points a week.',
-      render: () => R.career.map((c,i) => row(i, c.mgr,
+      note: 'Top five by average points a week, across four seasons.',
+      render: () => R.career.slice(0,5).map((c,i) => row(i, c.mgr,
         c.w + '&ndash;' + c.l + ' &middot; ' + c.weeks + ' weeks &middot; ' +
         (c.c200 ? c.c200 + '&times; 200 &middot; ' : '') + 'best ' + c.best.toFixed(1),
         c.avg.toFixed(1), 'avg week', {here:c.here}))
