@@ -946,7 +946,7 @@ const pickNo = (rd, slot) => (rd-1)*DATA.ask.teams + (rd%2 ? slot : DATA.ask.tea
     const d = '<span class="v">' + Math.round(g.vorp) + ' points drafted</span>' +
       (mk ? '<span> &middot; ' + (late >= 0 ? late + ' picks of value'
                                             : Math.abs(late) + ' picks reached') + '</span>' : '') +
-      (g.worst ? '<span class="np"> &middot; worst pick ' + rd(g.worst) + '</span>' : '');
+      (g.worst ? '<span class="np"> &middot; biggest reach ' + rd(g.worst) + '</span>' : '');
     return '<div class="grow' + cls + '" data-mgr="' + esc(g.mgr) + '">' +
       '<span class="gl">' + g.grade + '</span>' + av(g.mgr) +
       '<span class="who"><span class="n">' + esc(g.mgr) + '</span>' +
