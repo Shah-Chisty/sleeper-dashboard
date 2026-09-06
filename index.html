@@ -393,12 +393,14 @@ h4.mini{font:700 11px Archivo; letter-spacing:.14em; text-transform:uppercase; c
 .method{font-size:12.5px; color:var(--t3); background:var(--card); border:1px solid var(--line);
   border-radius:12px; padding:12px 15px; margin-top:12px; line-height:1.6}
 
-.tick{margin-top:26px; border:1px solid var(--line); background:var(--card); border-radius:14px;
+.tick{margin:18px 0 0; border:1px solid var(--line); background:var(--card); border-radius:14px;
   overflow:hidden; white-space:nowrap; padding:11px 0}
-.tick span{display:inline-block; font:700 11px Archivo; letter-spacing:.13em; text-transform:uppercase;
-  color:var(--t3); padding-left:100%; animation:tk 30s linear infinite}
+.tkin{display:flex; width:max-content; animation:tk 46s linear infinite}
+.tick:hover .tkin{animation-play-state:paused}
+.tick span{display:block; flex:0 0 auto; font:700 11px Archivo; letter-spacing:.13em;
+  text-transform:uppercase; color:var(--t3); padding-right:26px}
 .tick b{color:var(--yellow)}
-@keyframes tk{to{transform:translateX(-100%)}}
+@keyframes tk{to{transform:translateX(-50%)}}
 footer{margin-top:34px; padding-top:20px; border-top:1px solid var(--line); font-size:12.5px; color:var(--t3)}
 @media (prefers-reduced-motion:reduce){*{animation:none!important; transition:none!important}}
 </style>
@@ -424,6 +426,8 @@ footer{margin-top:34px; padding-top:20px; border-top:1px solid var(--line); font
 </nav>
 
 <div class="wrap">
+
+<div class="tick"><div class="tkin"><span id="tickr"></span><span id="tickr2" aria-hidden="true"></span></div></div>
 
 <header class="mast">
   <div class="ey">Keeper board &middot; 2026</div>
@@ -621,7 +625,6 @@ footer{margin-top:34px; padding-top:20px; border-top:1px solid var(--line); font
   </details>
 </section>
 
-<div class="tick"><span id="tickr"></span></div>
 
 <footer>
   <p>Built from the league's own Sleeper draft boards and a projection board. Player images from Sleeper. Questions about a cost or a clock go to KillaTae17.</p>
@@ -745,8 +748,9 @@ const pickNo = (rd, slot) => (rd-1)*DATA.ask.teams + (rd%2 ? slot : DATA.ask.tea
                   : 'every keeper has a year left';
     })()
   ];
-  document.getElementById('tickr').innerHTML =
-    bits.join(' &nbsp;&bull;&nbsp; ') + ' &nbsp;&bull;&nbsp; ';
+  const line = bits.join(' &nbsp;&bull;&nbsp; ') + ' &nbsp;&bull;&nbsp; ';
+  document.getElementById('tickr').innerHTML = line;
+  document.getElementById('tickr2').innerHTML = line;
 })();
 
 /* ---------------- section nav highlight ---------------- */
