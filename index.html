@@ -26,7 +26,7 @@ body{margin:0; background:var(--bg); color:var(--t1);
   background-image:
     radial-gradient(900px 520px at 10% -8%, rgba(47,123,255,.20), transparent 60%),
     radial-gradient(760px 460px at 94% 2%, rgba(255,212,0,.10), transparent 56%)}
-.wrap{max-width:1120px; margin:0 auto; padding:0 16px 80px}
+.wrap{max-width:1320px; margin:0 auto; padding:0 16px 80px}
 h1,h2,h3,.disp{font-family:Anton,Archivo,sans-serif; font-weight:400; text-transform:uppercase;
   letter-spacing:.012em; text-wrap:balance}
 .num{font-variant-numeric:tabular-nums}
@@ -42,7 +42,7 @@ a{color:var(--blue2)}
 /* ---------- sticky section nav ---------- */
 .nav{position:sticky; top:0; z-index:40; background:rgba(11,13,18,.92);
   backdrop-filter:blur(12px); border-bottom:1px solid var(--line); margin-bottom:22px}
-.nav .inner{max-width:1120px; margin:0 auto; padding:0 16px; display:flex; align-items:center;
+.nav .inner{max-width:1320px; margin:0 auto; padding:0 16px; display:flex; align-items:center;
   gap:6px; height:var(--nav); overflow-x:auto; scrollbar-width:none}
 .nav .inner::-webkit-scrollbar{display:none}
 .nav a{flex:0 0 auto; text-decoration:none; color:var(--t2); font:600 13px Archivo;
@@ -280,17 +280,33 @@ table.board thead th img{width:24px; height:24px; border-radius:8px; object-fit:
 table.board thead th .s{display:block; font:700 9px Archivo; letter-spacing:.1em; color:var(--t3)}
 table.board thead th .n{font:600 11px Archivo; color:var(--t2); text-transform:none; letter-spacing:0}
 table.board thead th.self .n{color:var(--blue2)}
-table.board td{height:54px; text-align:center; padding:5px 6px; border:1px solid rgba(255,255,255,.04);
+/* Sleeper's own position colours, so the board reads the same as the app.
+   Dark ink on every one of them -- white on the teal and the orange is about
+   1.9:1, which is unreadable at 12px. */
+:root{--p-qb:#ff2a6d; --p-rb:#00ceb8; --p-wr:#58a7ff; --p-te:#ffae58;
+      --p-k:#bd66ff; --p-def:#7590a6; --p-ink:#0b0d12}
+table.board td{height:54px; text-align:center; padding:0; border:1px solid rgba(11,13,18,.55);
   transition:opacity .18s}
-table.board td .pk{font:500 10px Archivo; color:var(--t3); display:block; font-variant-numeric:tabular-nums}
-table.board td .nm{font:600 12px Archivo; color:var(--t1); display:block; line-height:1.25;
-  margin-top:2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
-table.board td .ps{font:700 9px Archivo; letter-spacing:.09em; color:var(--t3); display:block; margin-top:1px}
-table.board td.keep{background:rgba(255,212,0,.09)}
+table.board td .cw{display:block; height:100%; padding:6px 5px; border-radius:3px}
+table.board td .pk{font:600 9.5px Archivo; color:var(--t3); display:block; font-variant-numeric:tabular-nums}
+table.board td .nm{font:700 12px Archivo; color:var(--t1); display:block; line-height:1.2;
+  margin-top:3px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+table.board td .ps{font:700 8.5px Archivo; letter-spacing:.1em; color:var(--t3); display:block; margin-top:2px}
+table.board td[data-pos] .cw{background:var(--pc)}
+table.board td[data-pos] .nm{color:var(--p-ink)}
+table.board td[data-pos] .pk,table.board td[data-pos] .ps{color:rgba(11,13,18,.62)}
+table.board td[data-pos="QB"]{--pc:var(--p-qb)}
+table.board td[data-pos="RB"]{--pc:var(--p-rb)}
+table.board td[data-pos="WR"]{--pc:var(--p-wr)}
+table.board td[data-pos="TE"]{--pc:var(--p-te)}
+table.board td[data-pos="K"]{--pc:var(--p-k)}
+table.board td[data-pos="DEF"],table.board td[data-pos="DST"]{--pc:var(--p-def)}
+/* The cells carry the position colour now, so keeper and "yours" become rings
+   rather than fills -- a gold fill would read as a seventh position. */
+table.board td.keep .cw{box-shadow:inset 0 0 0 2.5px var(--yellow)}
 table.board td.keep .nm{font-family:Anton; font-weight:400; font-size:13.5px; letter-spacing:.01em}
-table.board td.keep .pk,table.board td.keep .ps{color:var(--yellow)}
-table.board td.self{background:rgba(47,123,255,.13)}
-table.board td.keep.self{background:linear-gradient(135deg,rgba(255,212,0,.11) 50%,rgba(47,123,255,.15) 50%)}
+table.board td.self .cw{box-shadow:inset 0 0 0 2.5px #fff}
+table.board td.keep.self .cw{box-shadow:inset 0 0 0 2.5px var(--yellow), inset 0 0 0 5px #fff}
 table.board td.dim{opacity:.26}
 /* ---------- data source strip ---------- */
 .srcs{display:flex; gap:8px; flex-wrap:wrap; margin:0 0 14px}
@@ -306,10 +322,12 @@ table.board td.dim{opacity:.26}
   transition:background .14s}
 .grow:hover{background:#262b36}
 .grow.self{border-color:var(--blue); background:rgba(47,123,255,.11)}
+/* Colour the letter by the grade, not by finishing position -- ranking colour
+   and letter colour disagreeing is why an A read gold and an A- read green. */
 .grow .gl{font-family:Anton; font-size:26px; line-height:1; text-align:center; color:var(--t2)}
-.grow.t1 .gl{color:var(--yellow)}
-.grow.t3 .gl{color:var(--green)}
-.grow.bot .gl{color:var(--red)}
+.grow.ga .gl{color:var(--green)}
+.grow.gb .gl{color:var(--yellow)}
+.grow.gc .gl{color:var(--red)}
 .grow .av{width:34px; height:34px; border-radius:11px; object-fit:cover}
 .grow .who{min-width:0}
 .grow .who .n{font:600 14px Archivo; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
@@ -398,7 +416,7 @@ h4.mini{font:700 11px Archivo; letter-spacing:.14em; text-transform:uppercase; c
 .soon .b{font-family:Anton; font-size:27px; color:var(--t2)}
 .soon p{font-size:13.5px; color:var(--t3); margin:9px auto 0; max-width:52ch}
 .method{font-size:12.5px; color:var(--t3); background:var(--card); border:1px solid var(--line);
-  border-radius:12px; padding:12px 15px; margin-top:12px; line-height:1.6}
+  border-radius:12px; padding:12px 15px; margin-top:12px; line-height:1.6; max-width:118ch}
 
 .tick{margin:18px 0 0; border:1px solid var(--line); background:var(--card); border-radius:14px;
   overflow:hidden; white-space:nowrap; padding:11px 0}
@@ -495,8 +513,14 @@ footer{margin-top:34px; padding-top:20px; border-top:1px solid var(--line); font
   </div>
   <div class="bscroll"><table class="board" id="board"><thead></thead><tbody></tbody></table></div>
   <div class="legend">
-    <span><i class="sw" style="background:rgba(255,212,0,.16)"></i> Keeper — pick already used</span>
-    <span><i class="sw" style="background:rgba(47,123,255,.2)"></i> Your picks</span>
+    <span><i class="sw" style="background:var(--p-qb)"></i> QB</span>
+    <span><i class="sw" style="background:var(--p-rb)"></i> RB</span>
+    <span><i class="sw" style="background:var(--p-wr)"></i> WR</span>
+    <span><i class="sw" style="background:var(--p-te)"></i> TE</span>
+    <span><i class="sw" style="background:var(--p-k)"></i> K</span>
+    <span><i class="sw" style="background:var(--p-def)"></i> DEF</span>
+    <span><i class="sw" style="box-shadow:inset 0 0 0 2.5px var(--yellow)"></i> Keeper</span>
+    <span><i class="sw" style="box-shadow:inset 0 0 0 2.5px #fff"></i> Your picks</span>
   </div>
 </section>
 
@@ -890,11 +914,13 @@ const pickNo = (rd, slot) => (rd-1)*DATA.ask.teams + (rd%2 ? slot : DATA.ask.tea
       const td = document.createElement('td');
       td.className = 'cell' + (c.keeper ? ' keep' : '');
       td.dataset.slot = c.slot; td.dataset.keep = c.keeper ? '1' : '0';
+      if(c.pos) td.dataset.pos = c.pos;
       if(c.player) td.title = c.player + ' \u2014 ' + c.mgr +
         ' \u00b7 round ' + c.round + ', pick ' + c.pick + (c.keeper ? ' (keeper)' : '');
-      td.innerHTML = '<span class="pk">' + c.pick + '</span>' +
+      td.innerHTML = '<span class="cw"><span class="pk">' + c.pick + '</span>' +
         (c.player ? '<span class="nm">' + esc(c.short || c.player) + '</span>' +
-                    (c.pos ? '<span class="ps">' + esc(c.pos) + '</span>' : '') : '');
+                    (c.pos ? '<span class="ps">' + esc(c.pos) + '</span>' : '') : '') +
+        '</span>';
       tr.appendChild(td);
     });
     body.appendChild(tr);
@@ -905,12 +931,11 @@ const pickNo = (rd, slot) => (rd-1)*DATA.ask.teams + (rd%2 ? slot : DATA.ask.tea
 (function(){
   const box = document.getElementById('grows');
   if(!box || !DATA.grades || !DATA.grades.length) return;
-  const n = DATA.grades.length;
   const av = m => AV[m] ? '<img class="av" src="'+AV[m]+'" alt="">'
                         : '<span class="av" style="background:var(--bg)"></span>';
   const rd = p => p ? esc(p.player) + ' R' + p.round : null;
   box.innerHTML = DATA.grades.map(g => {
-    const cls = g.rank === 1 ? ' t1' : g.rank <= 3 ? ' t3' : g.rank === n ? ' bot' : '';
+    const cls = ' g' + g.grade.charAt(0).toLowerCase();
     // Every team's highest-VORP pick is their first-rounder, so showing it says
     // nothing. Roster value drafted and the biggest reach actually separate them.
     // The pick count is the droppable one when the line has to shrink.
