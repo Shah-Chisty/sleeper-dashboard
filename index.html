@@ -775,7 +775,7 @@ const pickNo = (rd, slot) => (rd-1)*DATA.ask.teams + (rd%2 ? slot : DATA.ask.tea
     (DATA.grades && DATA.grades.length
       ? '<b>Best draft: ' + DATA.grades[0].mgr + ' (' + DATA.grades[0].grade + ')</b>'
       : '<b>' + DATA.keepers.length + ' of ' + DATA.teams.length + ' keepers declared</b>'),
-    DATA.none.length ? DATA.none.join(', ') + ' opted out' : 'everyone declared',
+    DATA.none.length ? DATA.none.join(', ') + ' opted out of a keeper' : 'everyone declared a keeper',
     '<b>Best value: ' + best.player + ' ' + (best.value>=0?'+':'') + best.value + '</b>',
     'Worst: ' + worst.player + ' ' + (worst.value>=0?'+':'') + worst.value,
     (function(){
