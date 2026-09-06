@@ -292,6 +292,13 @@ table.board td.keep .pk,table.board td.keep .ps{color:var(--yellow)}
 table.board td.self{background:rgba(47,123,255,.13)}
 table.board td.keep.self{background:linear-gradient(135deg,rgba(255,212,0,.11) 50%,rgba(47,123,255,.15) 50%)}
 table.board td.dim{opacity:.26}
+/* ---------- data source strip ---------- */
+.srcs{display:flex; gap:8px; flex-wrap:wrap; margin:0 0 14px}
+.srcs span{display:inline-flex; gap:7px; align-items:baseline; background:var(--card);
+  border:1px solid var(--line); border-radius:11px; padding:8px 12px; font-size:12.5px;
+  color:var(--t2)}
+.srcs b{font:700 9.5px Archivo; letter-spacing:.13em; text-transform:uppercase; color:var(--t3)}
+
 /* ---------- draft grades ---------- */
 .gr{display:flex; flex-direction:column; gap:8px}
 .grow{display:grid; grid-template-columns:52px 34px 1fr auto; gap:14px; align-items:center;
@@ -469,8 +476,13 @@ footer{margin-top:34px; padding-top:20px; border-top:1px solid var(--line); font
 <section id="grades">
   <div class="shead"><h2>Draft grades</h2><span class="note">Value taken vs. value left</span></div>
   <p class="lede">Every pick measured against the best player still on the board when it came up. Draft the best available every time and you score zero &mdash; nobody does.</p>
+  <div class="srcs">
+    <span><b>Projections &amp; ADP</b> ESPN PPR, pulled 27 Aug 2026</span>
+    <span><b>Picks, keepers, rosters</b> Sleeper</span>
+    <span><b>Replacement level</b> this league's own starting slots</span>
+  </div>
   <div class="gr" id="grows"></div>
-  <div class="method">A pick is worth its player's projected points above replacement at his position (QB 292, WR 196, RB 193, TE 169; ESPN PPR projections). <b>Left on the board</b> is that number minus the best available when the pick came up, summed over the draft. Every team goes negative &mdash; taking the top projection at all fifteen picks would mean drafting four tight ends and no quarterback &mdash; so the letters are set against the league's own spread, not an absolute scale. <b>Keepers are excluded on both sides.</b> They are off the board from the deadline, not from the pick they cost, and the rules set the round, so there is no decision to grade; the Ranked section further down is where they get judged. Kickers and defenses are left out entirely &mdash; they get streamed off waivers.</div>
+  <div class="method"><b>These grades are ESPN's opinion, not Sleeper's.</b> Sleeper publishes no projections, so every points number here comes from ESPN's PPR projection board pulled 27 Aug 2026 &mdash; before the season started, so nobody is being graded on hindsight. Sleeper supplies only the facts: who picked whom, in what order, and which players were kept. A pick is worth its player's projected points above replacement at his position (QB 292, WR 196, RB 193, TE 169), where replacement is the last startable player at that position across the league on this league's own roster slots &mdash; 10 teams, 1 QB, 2 RB, 2 WR, 1 TE, 2 flex. <b>Left on the board</b> is that number minus the best available when the pick came up, summed over the draft. Every team goes negative &mdash; taking the top projection at all fifteen picks would mean drafting four tight ends and no quarterback &mdash; so the letters are set against the league's own spread, not an absolute scale. <b>Keepers are excluded on both sides.</b> They are off the board from the deadline, not from the pick they cost, and the rules set the round, so there is no decision to grade; the Ranked section further down is where they get judged. Kickers and defenses are left out entirely &mdash; they get streamed off waivers.</div>
 </section>
 
 <section id="board">
